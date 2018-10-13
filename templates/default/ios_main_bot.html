@@ -1,0 +1,48 @@
+
+<?py if 'newest_node' in _context and newest_node: ?>
+    <div class="title">最近添加的分类</div>
+    <div class="main-box main-box-node">
+    <div class="btn">
+    <?py for k,name in newest_node: ?>
+    <a href="/#{k}">#{name}</a>
+    <?py #endfor ?>
+    </div>
+    <div class="c"></div>
+    </div>
+<?py #endif ?>
+
+<?py if 'recent_topic_objs' in _context and recent_topic_objs: ?>
+    <div class="title">最近发表</div>
+    <div class="main-box">
+    <ul class="bot-item-list">
+    <?py for k,tit in recent_topic_objs: ?>
+    <li>&raquo; <a href="/#{k}">#{tit}</a></li>
+    <?py #endfor ?>    
+    </ul>
+    <div class="c"></div>
+    </div>
+<?py #endif ?>
+
+<?py if 'reply_topic_objs' in _context and reply_topic_objs: ?>
+    <div class="title">刚被挖出来的</div>
+    <div class="main-box">
+    <ul class="bot-item-list">
+    <?py for k,tit in reply_topic_objs: ?>
+    <li>&raquo; <a href="/#{k}">#{tit}</a></li>
+    <?py #endfor ?>    
+    </ul>
+    <div class="c"></div>
+    </div>
+<?py #endif ?>
+
+<?py if LINK_BROLL: ?>
+    <div class="title">链接</div>
+    <div class="main-box main-box-node">
+    <div class="btn">
+    <?py for link in LINK_BROLL: ?>
+    <a href="#{link['url']}" title="${link['title']}" target="blank">#{link['text']}</a>
+    <?py #endfor ?>
+    </div>
+    <div class="c"></div>
+    </div>
+<?py #endif ?>

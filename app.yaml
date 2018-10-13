@@ -1,0 +1,44 @@
+
+runtime: python27
+api_version: '1'
+env: standard
+threadsafe: true
+instance_class: F1
+default_expiration: 315360000s
+inbound_services:
+  - mail
+  - warmup
+libraries:
+  - name: PIL
+    version: latest
+  - name: webob
+    version: latest
+handlers:
+  - url: /favicon.ico
+    application_readable: false
+    mime_type: image/x-icon
+    static_files: static/favicon.ico
+    require_matching_file: false
+    upload: static/favicon.ico
+  - url: '/static/(.*)'
+    application_readable: false
+    static_files: "static/\\1"
+    require_matching_file: false
+    upload: 'static/.*'
+  - url: "/static/(.+(\\.)+(js|css|jpg|gif|png))"
+    application_readable: false
+    expiration: 31536000000
+    static_files: "static/\\1"
+    require_matching_file: false
+    upload: "static/.+(\\.)+(js|css|jpg|gif|png)"
+  - url: '.*'
+    script: view.application
+builtins:
+  - deferred: 'on'
+error_handlers:
+  - file: ''
+automatic_scaling:
+  min_idle_instances: automatic
+  max_idle_instances: 1
+  min_pending_latency: automatic
+  max_pending_latency: automatic
